@@ -10,6 +10,7 @@ import { useLocalStorage } from './hooks/useLocalStorage';
 
 // Components / Pages
 import { NewNote } from './components/NewNote';
+import { NoteList } from './components/NoteList';
 
 import { v4 as uuidV4 } from 'uuid';
 
@@ -73,7 +74,10 @@ const App = () => {
   return (
     <Container className='my-4'>
       <Routes>
-        <Route path='/' element={<h1>/</h1>} />
+        <Route
+          path='/'
+          element={<NoteList availableTags={tags} notes={notesWithTags} />}
+        />
         <Route
           path='/new'
           element={
