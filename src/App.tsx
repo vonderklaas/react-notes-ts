@@ -11,8 +11,10 @@ import { useLocalStorage } from './hooks/useLocalStorage';
 // Components / Pages
 import { NewNote } from './components/NewNote';
 import { NoteList } from './components/NoteList';
+import { NoteLayout } from './components/NoteLayout';
 
 import { v4 as uuidV4 } from 'uuid';
+import { Note } from './components/Note';
 
 export type Note = {
   id: string;
@@ -88,8 +90,8 @@ const App = () => {
             />
           }
         />
-        <Route path='/:id'>
-          <Route index element={<h1>Show</h1>}></Route>
+        <Route path='/:id' element={<NoteLayout notes={notesWithTags} />}>
+          <Route index element={<Note />}></Route>
           <Route path='edit' element={<h1>Edit</h1>}></Route>
         </Route>
         <Route path='*' element={<Navigate to={'/'} />} />
