@@ -13,7 +13,6 @@ export const EditNote = ({
   onAddTag,
   availableTags,
 }: EditNoteProps) => {
-  // Get note from Outlet context
   const note = useNote();
 
   return (

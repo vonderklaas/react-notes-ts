@@ -2,13 +2,9 @@ import { useMemo, useState } from 'react';
 import { Row, Col, Stack, Button, Form } from 'react-bootstrap';
 import { Link } from 'react-router-dom';
 import ReactSelect from 'react-select/creatable';
-
 import { NoteCard } from './NoteCard';
-
-import { Note, Tag } from '../App';
-
+import { Tag } from '../App';
 import { SimplifiedNote } from './NoteCard';
-
 import { EditTagsModal } from './EditTagsModal';
 
 type NoteListProp = {
@@ -29,19 +25,15 @@ export const NoteList = ({
   const [editTagsModalIsOpen, setEditTagsModalIsOpen] =
     useState<boolean>(false);
 
-  const handleClose = () => {
-    setEditTagsModalIsOpen(false);
-  };
+  const handleClose = () => setEditTagsModalIsOpen(false);
 
   const filteredNotes = useMemo(() => {
     return notes.filter((note) => {
-      // Return notes with exact title in them, and tags match
       return (
         (title === '' ||
           note.title.toLowerCase().includes(title.toLowerCase())) &&
         (selectedTags.length === 0 ||
           selectedTags.every((tag) =>
-            // Check if our note contains a tag we are looping through
             note.tags.some((noteTag) => noteTag.id === tag.id)
           ))
       );
@@ -54,7 +46,6 @@ export const NoteList = ({
         <Col>
           <h1>Notes</h1>
         </Col>
-        {/* Make it take minimum space */}
         <Col xs='auto'>
           <Stack gap={2} direction='horizontal'>
             <Link to='/new'>
@@ -113,7 +104,6 @@ export const NoteList = ({
           </Col>
         </Row>
       </Form>
-      {/* How many elements to show, + gap */}
       <Row xs={1} sm={2} lg={3} xl={4} className='g-3'>
         {filteredNotes.map((note) => {
           return (

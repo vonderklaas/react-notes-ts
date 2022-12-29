@@ -2,8 +2,6 @@ import { Badge, Card, Stack } from 'react-bootstrap';
 import { Link } from 'react-router-dom';
 import { Tag } from '../App';
 
-import styles from './NoteCard.module.css';
-
 export type SimplifiedNote = {
   tags: Tag[];
   title: string;
@@ -15,7 +13,7 @@ export const NoteCard = ({ id, title, tags }: SimplifiedNote) => {
     <Card
       as={Link}
       to={`/${id}`}
-      className={`h-100 text-reset text-decoration-none ${styles.card}`}
+      className={`h-100 text-reset text-decoration-none`}
     >
       <Card.Body>
         <Stack

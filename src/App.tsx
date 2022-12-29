@@ -1,19 +1,13 @@
 import 'bootstrap/dist/css/bootstrap.min.css';
-import { Container } from 'react-bootstrap';
-
-import { Routes, Route, Navigate } from 'react-router-dom';
-
 import { useMemo } from 'react';
-
-// Hooks
+import { v4 as uuidV4 } from 'uuid';
+import { Routes, Route, Navigate } from 'react-router-dom';
+import { Container } from 'react-bootstrap';
+// Custom Hook
 import { useLocalStorage } from './hooks/useLocalStorage';
-
-// Components / Pages
 import { NewNote } from './components/NewNote';
 import { NoteList } from './components/NoteList';
 import { NoteLayout } from './components/NoteLayout';
-
-import { v4 as uuidV4 } from 'uuid';
 import { Note } from './components/Note';
 import { EditNote } from './components/EditNote';
 
@@ -72,21 +66,16 @@ const App = () => {
 
   const onUpdateNote = (id: string, { tags, ...data }: NoteData) => {
     setNotes((previousNotes) => {
-      return previousNotes.map((note) => {
-        if (note.id === id) {
-          // Saving all existing data and overwriting with new data
-          return { ...note, ...data, tagIds: tags.map((tag) => tag.id) };
-        } else {
-          return note;
-        }
-      });
+      return previousNotes.map((note) =>
+        note.id === id
+          ? { ...note, ...data, tagIds: tags.map((tag) => tag.id) }
+          : note
+      );
     });
   };
 
   const onDeleteNote = (id: string) => {
-    setNotes((prevNotes) => {
-      return prevNotes.filter((note) => note.id !== id);
-    });
+    setNotes((prevNotes) => prevNotes.filter((note) => note.id !== id));
   };
 
   const onAddTag = (tag: Tag): void => {
@@ -94,21 +83,13 @@ const App = () => {
   };
 
   const updateTag = (id: string, label: string): void => {
-    setTags((prevTags) => {
-      return prevTags.map((tag) => {
-        if (tag.id === id) {
-          return { ...tag, label };
-        } else {
-          return tag;
-        }
-      });
-    });
+    setTags((prevTags) =>
+      prevTags.map((tag) => (tag.id === id ? { ...tag, label } : tag))
+    );
   };
 
   const deleteTag = (id: string): void => {
-    setTags((prevTags) => {
-      return prevTags.filter((tag) => tag.id !== id);
-    });
+    setTags((prevTags) => prevTags.filter((tag) => tag.id !== id));
   };
 
   return (

@@ -1,18 +1,14 @@
 import { Col, Form, Row, Stack, Button } from 'react-bootstrap';
 import CreatableReactSelect from 'react-select/creatable';
-
 import { Link, useNavigate } from 'react-router-dom';
-
 import { FormEvent, useRef, useState } from 'react';
 import { NoteData, Tag } from '../App';
-
 import { v4 as uuidV4 } from 'uuid';
 
 type NoteFormProps = {
   onSubmit: (data: NoteData) => void;
   onAddTag: (tag: Tag) => void;
   availableTags: Tag[];
-  // + properties from NoteData
   title?: string;
   markdown?: string;
   tags?: Tag[];
@@ -22,7 +18,6 @@ export const NoteForm = ({
   onSubmit,
   onAddTag,
   availableTags,
-  // here they are
   title = '',
   markdown = '',
   tags = [],
@@ -110,7 +105,6 @@ export const NoteForm = ({
           <Button type='submit' variant='primary'>
             Save
           </Button>
-          {/* Go one page back */}
           <Link to='..'>
             <Button type='button' variant='outline-secondary'>
               Cancel
